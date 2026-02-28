@@ -1,4 +1,12 @@
 import mongoose from "mongoose";
+import dns from "dns";
+
+// On non-production environments (Windows dev), Atlas SRV lookups can fail
+// with ECONNREFUSED. Forcing IPv4 DNS order fixes it locally without
+// affecting Render's Linux resolver.
+if (process.env.NODE_ENV !== "production") {
+  dns.setDefaultResultOrder("ipv4first");
+}
 
 const connectDB = async (): Promise<void> => {
   try {
