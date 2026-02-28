@@ -11,6 +11,7 @@ export const submitApplicationSchema = z.object({
   email: z
     .string()
     .min(1, "Email is required")
+    .email("Email must be a valid email address")
     .transform((v) => v.toLowerCase()),
   resumeUrl: z.string().url("Resume URL must be a valid URL"),
   coverNote: z
