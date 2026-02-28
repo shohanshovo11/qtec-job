@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import dns from "dns";
 
-// On non-production environments (Windows dev), Atlas SRV lookups can fail
-// with ECONNREFUSED. Forcing IPv4 DNS order fixes it locally without
-// affecting Render's Linux resolver.
+// On Windows dev, the system DNS blocks SRV queries used by Atlas +srv URIs.
+// Overriding to Google/Cloudflare DNS + ipv4first fixes it locally.
+// Skipped on Render (production) where the native resolver works correctly.
 if (process.env.NODE_ENV !== "production") {
+  dns.setServers(["8.8.8.8", "1.1.1.1", "8.8.4.4"]);
   dns.setDefaultResultOrder("ipv4first");
 }
 
