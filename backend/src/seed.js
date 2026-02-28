@@ -767,17 +767,24 @@ const seed = async () => {
     console.log(`✓ Seeded ${inserted.length} jobs successfully.`);
 
     // ── Admin account ──────────────────────────────────────────────────────
-    const adminEmail = process.env.ADMIN_EMAIL || 'admin@quickhire.com';
-    const adminPassword = process.env.ADMIN_PASSWORD || 'Admin@123';
-
-    await User.deleteOne({ email: adminEmail });
+    await User.deleteOne({ email: 'admin' });
     await User.create({
       name: 'Admin',
-      email: adminEmail,
-      password: adminPassword,
+      email: 'admin',
+      password: 'admin123',
       role: 'admin',
     });
-    console.log(`✓ Admin account ready: ${adminEmail} / ${adminPassword}`);
+    console.log('✓ Admin account ready: admin / admin123');
+
+    // ── User account ───────────────────────────────────────────────────────
+    await User.deleteOne({ email: 'user' });
+    await User.create({
+      name: 'User',
+      email: 'user',
+      password: 'user123',
+      role: 'user',
+    });
+    console.log('✓ User account ready:  user  / user123');
     // ───────────────────────────────────────────────────────────────────────
   } catch (error) {
     console.error('Seed error:', error.message);
