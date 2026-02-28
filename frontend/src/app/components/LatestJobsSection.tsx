@@ -1,32 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { fetchJobs } from "@/lib/api";
-
-const TYPE_STYLES: Record<string, string> = {
-  "Full Time": "bg-[#E8F5F0] text-[#14A077]",
-  "Part Time": "bg-[#FFF6E6] text-[#E88A00]",
-  Remote: "bg-[#EEF0FF] text-[#4640DE]",
-  Contract: "bg-[#FFE9E9] text-[#E05151]",
-  Internship: "bg-[#F2ECFF] text-[#7B2FBE]",
-};
-
-const TAG_STYLES: Record<string, string> = {
-  Design: "bg-[#E8F5F0] text-[#14A077]",
-  Marketing: "bg-[#FFF6E6] text-[#E88A00]",
-  Business: "bg-[#EEF0FF] text-[#4640DE]",
-  Technology: "bg-[#FFE9E9] text-[#E05151]",
-  Engineering: "bg-[#E8F0FF] text-[#2563EB]",
-  Finance: "bg-[#FEF9C3] text-[#A16207]",
-  Sales: "bg-[#FCE7F3] text-[#BE185D]",
-  "Human Resource": "bg-[#F2ECFF] text-[#7B2FBE]",
-};
-
-function getTagStyle(tag: string): string {
-  for (const [key, val] of Object.entries(TAG_STYLES)) {
-    if (tag.toLowerCase().includes(key.toLowerCase())) return val;
-  }
-  return "bg-[var(--color-brand-100)] text-[var(--action-primary)]";
-}
+import { TYPE_STYLES, getTagStyle } from "@/lib/jobStyles";
+import SectionHeader from "./SectionHeader";
+import CompanyLogo from "./CompanyLogo";
 
 export default async function LatestJobsSection() {
   const result = await fetchJobs({ sortBy: "newest", limit: "8" });
@@ -46,36 +23,15 @@ export default async function LatestJobsSection() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
         {/* Header */}
-        <div className="flex items-center justify-between mb-12">
-          <h2
-            className="text-3xl md:text-4xl font-bold"
-            style={{ fontFamily: "var(--font-epilogue), sans-serif" }}
-          >
-            <span className="text-[var(--text-primary)]">Latest </span>
-            <span className="text-primary">jobs </span>
-            <span className="text-primary">open</span>
-          </h2>
-
-          <Link
-            href="/jobs"
-            className="flex items-center gap-2 text-sm font-semibold text-[var(--action-primary)] hover:text-[var(--action-primary-hover)] transition-colors duration-200 shrink-0"
-            style={{ fontFamily: "var(--font-epilogue), sans-serif" }}
-          >
-            Show all jobs
-            <div className="w-5 h-5 relative">
-              <Image
-                src="/icons/arrow-right.svg"
-                alt="arrow"
-                fill
-                className="object-contain"
-                style={{
-                  filter:
-                    "invert(27%) sepia(93%) saturate(1352%) hue-rotate(224deg) brightness(97%) contrast(97%)",
-                }}
-              />
-            </div>
-          </Link>
-        </div>
+        <SectionHeader
+          title={
+            <>
+              <span className="text-[var(--text-primary)]">Latest </span>
+              <span className="text-primary">jobs </span>
+              <span className="text-primary">open</span>
+            </>
+          }
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {latestJobs.map((job) => (
@@ -85,20 +41,12 @@ export default async function LatestJobsSection() {
               className="bg-white border border-[var(--border-subtle)] hover:border-[var(--action-primary)] hover:shadow-lg transition-all duration-200 p-6 flex items-center gap-5 cursor-pointer group"
             >
               {/* Logo */}
-              <div className="w-16 h-16 relative shrink-0 bg-[var(--color-neutral-50)] border border-[var(--border-subtle)] flex items-center justify-center">
-                {job.logo ? (
-                  <Image
-                    src={job.logo}
-                    alt={job.company}
-                    fill
-                    className="object-contain p-2"
-                  />
-                ) : (
-                  <span className="text-lg font-bold text-[var(--text-muted)]">
-                    {job.company.charAt(0).toUpperCase()}
-                  </span>
-                )}
-              </div>
+              <CompanyLogo
+                logo={job.logo}
+                company={job.company}
+                size="w-16 h-16"
+                imageClassName="object-contain p-2"
+              />
 
               {/* Info */}
               <div className="flex flex-col gap-2 min-w-0">

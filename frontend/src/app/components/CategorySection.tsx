@@ -1,6 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
 import CategoryCard from "./CategoryCard";
+import SectionHeader from "./SectionHeader";
 import { fetchCategories } from "@/lib/api";
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -29,36 +28,13 @@ export default async function CategorySection() {
     <section className="w-full bg-white py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         {/* Header row */}
-        <div className="flex items-center justify-between mb-12">
-          <h2
-            className="text-3xl md:text-4xl font-bold text-foreground"
-            style={{
-              fontFamily: "var(--font-sora), var(--font-epilogue), sans-serif",
-            }}
-          >
-            Explore by <span className="text-brand">category</span>
-          </h2>
-
-          <Link
-            href="/jobs"
-            className="flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand/80 transition-colors duration-200 shrink-0"
-            style={{ fontFamily: "var(--font-epilogue), sans-serif" }}
-          >
-            Show all jobs
-            <div className="w-5 h-5 relative">
-              <Image
-                src="/icons/arrow-right.svg"
-                alt="arrow"
-                fill
-                className="object-contain"
-                style={{
-                  filter:
-                    "invert(27%) sepia(93%) saturate(1352%) hue-rotate(224deg) brightness(97%) contrast(97%)",
-                }}
-              />
-            </div>
-          </Link>
-        </div>
+        <SectionHeader
+          title={
+            <>
+              Explore by <span className="text-brand">category</span>
+            </>
+          }
+        />
 
         {/* Category grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
