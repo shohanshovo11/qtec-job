@@ -216,7 +216,7 @@ export default function HeroSection() {
           >
             Companies we helped grow
           </p>
-          <div className="flex items-center justify-between w-full">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-x-8 gap-y-6 items-center">
             {[
               {
                 src: "/images/companies/vodafone-2017-logo.png",
@@ -229,7 +229,7 @@ export default function HeroSection() {
             ].map((company) => (
               <div
                 key={company.alt}
-                className="relative h-8 w-32 grayscale opacity-50 hover:opacity-80 hover:grayscale-0 transition-all duration-300"
+                className="relative h-8 w-full grayscale opacity-50 hover:opacity-80 hover:grayscale-0 transition-all duration-300"
               >
                 <Image
                   src={company.src}

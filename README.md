@@ -76,7 +76,7 @@ App runs at `http://localhost:3000`
 ## Seed Accounts
 
 | Role  | Username | Password |
-|-------|----------|----------|
+| ----- | -------- | -------- |
 | Admin | admin    | admin123 |
 | User  | user     | user123  |
 

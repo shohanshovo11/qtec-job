@@ -31,12 +31,12 @@ NEXT_PUBLIC_API_URL=http://localhost:5000
 
 ### Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server at http://localhost:3000 |
-| `npm run build` | Build for production |
-| `npm start` | Start production server |
-| `npm run lint` | Run ESLint |
+| Command         | Description                               |
+| --------------- | ----------------------------------------- |
+| `npm run dev`   | Start dev server at http://localhost:3000 |
+| `npm run build` | Build for production                      |
+| `npm start`     | Start production server                   |
+| `npm run lint`  | Run ESLint                                |
 
 ## Project Structure
 
@@ -66,4 +66,3 @@ src/
 - **Job detail**: Full description, requirements, benefits, apply form
 - **Auth**: JWT stored in Zustand with localStorage persistence
 - **Admin panel**: Job CRUD, applicant management per job, user list
-

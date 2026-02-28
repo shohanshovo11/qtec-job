@@ -18,6 +18,9 @@ const sora = Sora({
 export const metadata: Metadata = {
   title: "QTEC",
   description: "QTEC job platform frontend",
+  icons: {
+    icon: "/icons/Logo-dark.svg",
+  },
 };
 
 export default function RootLayout({
