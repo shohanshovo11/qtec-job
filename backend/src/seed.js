@@ -767,24 +767,24 @@ const seed = async () => {
     console.log(`✓ Seeded ${inserted.length} jobs successfully.`);
 
     // ── Admin account ──────────────────────────────────────────────────────
-    await User.deleteOne({ email: 'admin' });
+    await User.deleteOne({ email: 'admin@qtec.com' });
     await User.create({
       name: 'Admin',
-      email: 'admin',
+      email: 'admin@qtec.com',
       password: 'admin123',
       role: 'admin',
     });
-    console.log('✓ Admin account ready: admin / admin123');
+    console.log('✓ Admin account ready: admin@qtec.com / admin123');
 
     // ── User account ───────────────────────────────────────────────────────
-    await User.deleteOne({ email: 'user' });
+    await User.deleteOne({ email: 'user@qtec.com' });
     await User.create({
       name: 'User',
-      email: 'user',
+      email: 'user@qtec.com',
       password: 'user123',
       role: 'user',
     });
-    console.log('✓ User account ready:  user  / user123');
+    console.log('✓ User account ready:  user@qtec.com  / user123');
     // ───────────────────────────────────────────────────────────────────────
   } catch (error) {
     console.error('Seed error:', error.message);

@@ -82,7 +82,7 @@ http://localhost:5000/api
 
 After running `npm run seed`:
 
-| Role  | Email | Password |
-| ----- | ----- | -------- |
-| Admin | admin | admin123 |
-| User  | user  | user123  |
+| Role  | Email          | Password |
+| ----- | -------------- | -------- |
+| Admin | admin@qtec.com | admin123 |
+| User  | user@qtec.com  | user123  |
