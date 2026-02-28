@@ -1,6 +1,4 @@
 import "dotenv/config";
-import dns from "dns";
-dns.setDefaultResultOrder("ipv4first");
 import express, { Request, Response } from "express";
 import cors from "cors";
 import connectDB from "./config/db";
@@ -26,6 +24,8 @@ app.use(
     origin: (origin, callback) => {
       // allow requests with no origin (curl, Postman, server-to-server)
       if (!origin) return callback(null, true);
+      // allow any netlify.app subdomain
+      if (origin.endsWith(".netlify.app")) return callback(null, true);
       if (allowedOrigins.includes(origin)) return callback(null, true);
       callback(new Error(`CORS: origin '${origin}' not allowed`));
     },
