@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Qtec Jobs — Frontend
+
+Job board web application built with Next.js 14 App Router, Tailwind CSS v4, and shadcn/ui.
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS v4 + shadcn/ui
+- **State**: Zustand (auth persistence)
+- **HTTP**: Axios
+- **UI Components**: Radix UI primitives via shadcn/ui
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- Backend API running on port 5000
+
+### Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a `.env.local` file in the `frontend/` directory:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Scripts
 
-## Learn More
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server at http://localhost:3000 |
+| `npm run build` | Build for production |
+| `npm start` | Start production server |
+| `npm run lint` | Run ESLint |
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── page.tsx              # Landing page
+│   ├── jobs/                 # Public job listing + detail + apply
+│   ├── login/                # Login page
+│   ├── signup/               # Register page
+│   ├── admin/                # Protected admin panel
+│   │   ├── page.tsx          # Dashboard
+│   │   ├── jobs/             # Job management + applicants
+│   │   ├── users/            # User management
+│   │   └── _components/      # AdminSidebar, JobForm
+│   └── components/           # Shared landing page sections
+├── components/ui/            # shadcn/ui primitives
+├── lib/api.ts                # Axios API client + typed helpers
+├── store/authStore.ts        # Zustand auth store
+└── context/AuthContext.tsx   # Legacy shim (deprecated)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Features
 
-## Deploy on Vercel
+- **Landing page**: Hero search, featured jobs, latest jobs, category browser
+- **Jobs page**: Keyword search, filters (type, category, location), sort, pagination
+- **Job detail**: Full description, requirements, benefits, apply form
+- **Auth**: JWT stored in Zustand with localStorage persistence
+- **Admin panel**: Job CRUD, applicant management per job, user list
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
